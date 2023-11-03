@@ -2,7 +2,9 @@
 
 namespace Models;
 
-class Company {
+use Models\FileConvertible;
+
+class Company implements FileConvertible {
 
     private string $name;
 
@@ -25,4 +27,20 @@ class Company {
     private string $founder;
 
     private int $totalEmployees;
+
+    public function toString(): string {
+        return "";
+    }
+
+    public function toHTML(): string {
+        return ("");
+    }
+
+    public function toMarkdown(): string {
+        return "";
+    }
+
+    public function toArray(): array {
+        return [];
+    }
 }
