@@ -4,6 +4,7 @@ namespace Helpers;
 
 use Faker\Factory;
 use Models\User;
+use Models\Employee;
 
 class RandomGenerator {
     public static function user(): User {
@@ -36,15 +37,37 @@ class RandomGenerator {
     }
 
     /**
-     * レストランチェーンのオブジェクト配列を返す
+     * 従業員をランダム生成
      * 
-     * @param int $min
-     * @param int $max
-     * @return array[RestaurantChain]
+     * @return Employee
      */
-    public static function restaurantChains(int $min, int $max): array
+    public static function createEmployee(): Employee
     {
-        return [];
+        $faker = Factory::create();
+        $employee = new Employee(
+            $faker->jobTitle,
+            $faker->randomFloat(2, 30000, 200000),
+            $faker->dateTimeThisDecade,
+            $faker->words($faker->numberBetween(1, 5)),
+        );
+
+        return $employee;
+    }
+
+    /**
+     * 従業員を複数人生成する
+     */
+    public static function createEmployees(int $min, $max): array
+    {
+        $faker = Factory::create();
+        $employees = [];
+        $numOfEmployees = $faker->numberBetween($min, $max);
+
+        for ($i = 0; $i < $numOfEmployees; $i++) {
+            $employees[] = self::user();
+        }
+
+        return $employees;
     }
 }
 ?>

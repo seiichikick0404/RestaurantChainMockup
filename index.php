@@ -16,11 +16,12 @@ $max = $_GET['max'] ?? 20;
 $min = (int)$min;
 $max = (int)$max;
 
-// ユーザーの生成
-$users = RandomGenerator::users($min, $max);
+
 
 // RestaurantChain生成
-$RestaurantChains = RandomGenerator::restaurantChains($min, $max);
+
+// 従業員を複数生成
+$employees = RandomGenerator::createEmployees($min, $max);
 
 ?>
 
@@ -29,6 +30,7 @@ $RestaurantChains = RandomGenerator::restaurantChains($min, $max);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>User Profiles</title>
     <style>
         /* ユーザーカードのスタイル */
@@ -37,8 +39,8 @@ $RestaurantChains = RandomGenerator::restaurantChains($min, $max);
 <body>
     <h1>User Profiles Test</h1>
 
-    <?php foreach ($users as $user): ?>
-    <?= $user->toHTML(); ?>
+    <?php foreach ($employees as $employee): ?>
+    <?= $employee->toHTML(); ?>
     <?php endforeach; ?>
 
 </body>
