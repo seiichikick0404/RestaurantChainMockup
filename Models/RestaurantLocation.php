@@ -12,7 +12,7 @@ class RestaurantLocation implements FileConvertible {
 
     private string $address;
 
-    private string $string;
+    private string $city;
 
     private string $state;
 
@@ -24,6 +24,26 @@ class RestaurantLocation implements FileConvertible {
     private bool $isOpen = false;
 
     private bool $hasDriveThru = false;
+
+    public function __construct(
+        string $name,
+        string $address,
+        string $city,
+        string $state,
+        string $zipCode,
+        array $employees,
+        bool $isOpen,
+        bool $hasDriveThru,
+    ) {
+        $this->name = $name;
+        $this->address = $address;
+        $this->city = $city;
+        $this->state = $state;
+        $this->zipCode = $zipCode;
+        $this->employees = $employees;
+        $this->isOpen = $isOpen;
+        $this->hasDriveThru = $hasDriveThru;
+    }
 
     public function toString(): string {
         return "";

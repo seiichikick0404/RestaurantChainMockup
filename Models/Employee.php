@@ -18,6 +18,16 @@ class Employee extends User implements FileConvertible {
 
     private array $awards;
 
+    public function __construct(
+        string $jobTitle,
+        float $salary,
+        DateTime $statDate,
+        array $awards,
+    ) {
+        $this->jobTitle = $jobTitle;
+        $this->salary = $salary;
+    }
+
     public function toString(): string {
         return "";
     }

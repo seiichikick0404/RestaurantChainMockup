@@ -34,5 +34,17 @@ class RandomGenerator {
 
         return $users;
     }
+
+    /**
+     * レストランチェーンのオブジェクト配列を返す
+     * 
+     * @param int $min
+     * @param int $max
+     * @return array[RestaurantChain]
+     */
+    public static function restaurantChains(int $min, int $max): array
+    {
+        return [];
+    }
 }
 ?>

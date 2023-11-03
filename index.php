@@ -18,6 +18,10 @@ $max = (int)$max;
 
 // ユーザーの生成
 $users = RandomGenerator::users($min, $max);
+
+// RestaurantChain生成
+$RestaurantChains = RandomGenerator::restaurantChains($min, $max);
+
 ?>
 
 <!DOCTYPE html>

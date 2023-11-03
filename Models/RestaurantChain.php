@@ -16,6 +16,20 @@ class RestaurantChain extends Company implements FileConvertible {
 
     private string $parentCompany;
 
+    public function __construct(
+        int $chainId,
+        array $restaurantLocation,
+        string $cuisineType,
+        int $numberOfLocations,
+        string $parentCompany,
+    ) {
+        $this->chainId = $chainId;
+        $this->restaurantLocation = $restaurantLocation;
+        $this->cuisineType = $cuisineType;
+        $this->numberOfLocations = $numberOfLocations;
+        $this->parentCompany = $parentCompany;
+    }
+
     public function toString(): string {
         return "";
     }
