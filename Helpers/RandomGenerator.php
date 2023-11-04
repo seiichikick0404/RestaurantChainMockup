@@ -10,6 +10,17 @@ use Models\RestaurantLocation;
 use Models\Company;
 
 class RandomGenerator {
+
+    
+    const MIN_RESTAURANT_CHAIN = 3;
+    const MAX_RESTAURANT_CHAIN = 5;
+    const MIN_EMPLOYEE = 2;
+    const MAX_EMPLOYEE = 5;
+    const MIN_RESTAURANT_LOCATION = 2;
+    const MAX_RESTAURANT_LOCATION = 5;
+
+
+
     public static function user(): User {
         $faker = Factory::create();
 
@@ -90,7 +101,7 @@ class RandomGenerator {
         $zipCode = $faker->postcode;
 
         // 従業員の配列を生成
-        $employees = self::createEmployees(1, 5);
+        $employees = self::createEmployees(self::MIN_EMPLOYEE, self::MAX_EMPLOYEE);
         $isOpen = $faker->boolean;
         $hasDriveThru = $faker->boolean;
 
@@ -142,10 +153,9 @@ class RandomGenerator {
 
         $chainId = $faker->randomNumber();
         $parentCompany = $parentCompanyName;
-        $cuisineType = $faker->randomElement(['Japanese', 'Italian', 'American', 'Mexican', 'Chinese']); // 例
-        $numberOfLocations = $faker->numberBetween(1, 5);
-
-        $restaurantLocations = self::createRestaurantLocations(1, 5);
+        $cuisineType = $faker->randomElement(['Japanese', 'Italian', 'American', 'Mexican', 'Chinese']);
+        $restaurantLocations = self::createRestaurantLocations(self::MIN_RESTAURANT_LOCATION, self::MAX_RESTAURANT_LOCATION);
+        $numberOfLocations = count($restaurantLocations);
 
         $restaurantChain = new RestaurantChain(
             $chainId,
@@ -184,10 +194,59 @@ class RandomGenerator {
      * 
      * @param Company
      */
-    // public static function createCompany(): Company
-    // {
-    //     $faker = Factory::create();
-        
-    // }
+    public static function createCompany(): Company
+    {
+        $faker = Factory::create();
+
+        $name = $faker->company;
+        $foundingYear = $faker->numberBetween(1800, 2020);
+        $description = $faker->catchPhrase;
+        $website = $faker->domainName;
+        $phone = $faker->phoneNumber;
+        $industry = $faker->word;
+        $ceo = $faker->name;
+        $publiclyTraded = $faker->boolean;
+        $country = $faker->country;
+        $founder = $faker->name;
+        $totalEmployees = $faker->numberBetween(50, 10000);
+
+        return new Company(
+            $name,
+            $foundingYear,
+            $description,
+            $website,
+            $phone,
+            $industry,
+            $ceo,
+            $publiclyTraded,
+            $country,
+            $founder,
+            $totalEmployees
+        );
+    }
+
+    /**
+     * 親会社を複数生成するのと同時に紐づくチェーンの配列を返す
+     * 
+     * @param int $min
+     * @param int $max
+     * @return array[Company, [RestaurantChain]]
+     */
+    public static function createCompaniesRestaurantChains($min, $max): array
+    {
+        $faker = Factory::create();
+        $numOfCompanies = $faker->numberBetween($min, $max);
+
+        $companyRestaurantChains = [];
+        for ($i= 0; $i < $numOfCompanies; $i++) {
+            $company = self::createCompany();
+            $companyRestaurantChains[] =  [
+                $company,
+                self::createRestaurantChains(self::MIN_RESTAURANT_CHAIN, self::MAX_RESTAURANT_CHAIN, $company->getName())
+            ];
+        }
+
+        return $companyRestaurantChains;
+    }
 }
 ?>

@@ -10,7 +10,7 @@ require_once 'vendor/autoload.php';
 
 // クエリ文字列からパラメータを取得
 $min = $_GET['min'] ?? 1;
-$max = $_GET['max'] ?? 5;
+$max = $_GET['max'] ?? 3;
 
 // パラメータが整数であることを確認
 $min = (int)$min;
@@ -18,19 +18,11 @@ $max = (int)$max;
 
 
 
-// RestaurantChain生成
+// 会社とそのチェーン店配列を取得
+$companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($min, $max);
 
-// 従業員を複数生成
-$employees = RandomGenerator::createEmployees($min, $max);
-
-
-
-//$restaurantLocations = RandomGenerator::createRestaurantLocations($min, $max);
-
-$restaurantChains = RandomGenerator::createRestaurantChains($min, $max, "Oriental Land Co., Ltd.");
-var_dump($restaurantChains);
+var_dump($companiesRestaurantChains[0][1]);
 exit;
-// 親会社を生成する
 
 
 

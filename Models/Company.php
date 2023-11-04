@@ -71,4 +71,13 @@ class Company implements FileConvertible {
     public function toArray(): array {
         return [];
     }
+
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }
