@@ -9,8 +9,8 @@ use Helpers\RandomGenerator;
 require_once 'vendor/autoload.php';
 
 // クエリ文字列からパラメータを取得
-$min = $_GET['min'] ?? 5;
-$max = $_GET['max'] ?? 20;
+$min = $_GET['min'] ?? 1;
+$max = $_GET['max'] ?? 5;
 
 // パラメータが整数であることを確認
 $min = (int)$min;
@@ -22,6 +22,21 @@ $max = (int)$max;
 
 // 従業員を複数生成
 $employees = RandomGenerator::createEmployees($min, $max);
+
+
+
+//$restaurantLocations = RandomGenerator::createRestaurantLocations($min, $max);
+
+$restaurantChains = RandomGenerator::createRestaurantChains($min, $max, "Oriental Land Co., Ltd.");
+var_dump($restaurantChains);
+exit;
+// 親会社を生成する
+
+
+
+
+
+
 
 ?>
 
@@ -37,6 +52,32 @@ $employees = RandomGenerator::createEmployees($min, $max);
     </style>
 </head>
 <body>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h2 class="mb-3 text-center">Restaurant Chain Rogahn, Ortiz and Stark</h2>
+        
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">Glover-Rice</div>
+            <div class="card-body">
+                <p class="font-weight-bold">Company Information:</p>
+                <p>Company Name: <span class="text-muted">Glover-Rice</span><br>
+                   Address: <span class="text-muted">9060 Kling Unions Apt. 659, Steidermannborough, Idaho ZipCode: 03603</span></p>
+                <h5>Employees:</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: 9, Job Title: cashier, <span class="font-weight-bold">Lyric Predovic</span>, Start Date: 2019-09-01</li>
+                    <li class="list-group-item">ID: 230295964, Job Title: chef, <span class="font-weight-bold">Constance Jaskolski</span>, Start Date: 2020-04-25</li>
+                    <li class="list-group-item">ID: 2514, Job Title: cashier, <span class="font-weight-bold">Joaquin McKenzie</span>, Start Date: 2023-03-24</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 他のレストランチェーン情報も同様にカードを追加してください -->
+
+    </div>
+
+
     <h1>User Profiles Test</h1>
 
     <?php foreach ($employees as $employee): ?>
