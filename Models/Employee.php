@@ -41,13 +41,9 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toHTML(): string {
-        // 最低限のHTMLで従業員情報を形成
-        return "<div class='employee-info'>
-                    Job Title: $this->jobTitle<br>
-                    Salary: $this->salary<br>
-                    Start Date: " . $this->startDate->format('Y-m-d') . "<br>
-                    Awards: " . implode(', ', $this->awards) . "
-                </div>";
+        return "<li class='list-group-item'>
+            ID: $this->id, Job Title: $this->jobTitle, $this->firstName . $this->lastName, Start Date: " . $this->startDate->format('Y-m-d') . "
+        </li>";
     }
 
     public function toMarkdown(): string {
@@ -57,4 +53,6 @@ class Employee extends User implements FileConvertible {
     public function toArray(): array {
         return [];
     }
+
+    
 }

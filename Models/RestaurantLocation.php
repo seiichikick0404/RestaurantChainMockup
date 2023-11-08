@@ -52,8 +52,8 @@ class RestaurantLocation implements FileConvertible {
     public function toHTML(): string {
         $isOpenString = $this->isOpen ? "Open" : "Closed";
         return "<div class='location-info'>
-                    <strong>$this->name</strong><br>
-                    Address: $this->address, $this->city, $this->state, $this->zipCode<br>
+                    <h2>$this->name</h2>
+                    <p>Address: $this->address, $this->city, $this->state, $this->zipCode
                     Status: $isOpenString
                 </div>";
     }
@@ -69,5 +69,10 @@ class RestaurantLocation implements FileConvertible {
     public function getEmployees(): array
     {
         return $this->employees;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }
