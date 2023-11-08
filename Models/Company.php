@@ -6,27 +6,27 @@ use Models\FileConvertible;
 
 class Company implements FileConvertible {
 
-    private string $name;
+    protected string $name;
 
-    private int $foundingYear;
+    protected int $foundingYear;
 
-    private string $description;
+    protected string $description;
 
-    private string $website;
+    protected string $website;
 
-    private string $phone;
+    protected string $phone;
 
-    private string $industry;
+    protected string $industry;
 
-    private string $ceo;
+    protected string $ceo;
 
-    private bool $publiclyTraded;
+    protected bool $publiclyTraded;
 
-    private string $country;
+    protected string $country;
 
-    private string $founder;
+    protected string $founder;
 
-    private int $totalEmployees;
+    protected int $totalEmployees;
 
 
     public function __construct(
@@ -61,7 +61,18 @@ class Company implements FileConvertible {
     }
 
     public function toHTML(): string {
-        return ("");
+        $publiclyTradedString = $this->publiclyTraded ? "Yes" : "No";
+        // 最低限のHTMLで会社情報を形成
+        return "<div class='company-info'>
+                    <strong>$this->name</strong><br>
+                    Founded: $this->foundingYear<br>
+                    $this->description<br>
+                    <a href='$this->website'>$this->website</a><br>
+                    Phone: $this->phone<br>
+                    Industry: $this->industry<br>
+                    CEO: $this->ceo<br>
+                    Publicly Traded: $publiclyTradedString
+                </div>";
     }
 
     public function toMarkdown(): string {

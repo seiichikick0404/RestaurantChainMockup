@@ -8,22 +8,22 @@ use Models\FileConvertible;
 
 class RestaurantLocation implements FileConvertible {
 
-    private string $name;
+    public string $name;
 
-    private string $address;
+    public string $address;
 
-    private string $city;
+    public string $city;
 
-    private string $state;
+    public string $state;
 
-    private string $zipCode;
+    public string $zipCode;
 
     /** @var Employee[] */
-    private array $employees;
+    public array $employees;
 
-    private bool $isOpen = false;
+    public bool $isOpen = false;
 
-    private bool $hasDriveThru = false;
+    public bool $hasDriveThru = false;
 
     public function __construct(
         string $name,
@@ -50,7 +50,12 @@ class RestaurantLocation implements FileConvertible {
     }
 
     public function toHTML(): string {
-        return ("");
+        $isOpenString = $this->isOpen ? "Open" : "Closed";
+        return "<div class='location-info'>
+                    <strong>$this->name</strong><br>
+                    Address: $this->address, $this->city, $this->state, $this->zipCode<br>
+                    Status: $isOpenString
+                </div>";
     }
 
     public function toMarkdown(): string {
@@ -59,5 +64,10 @@ class RestaurantLocation implements FileConvertible {
 
     public function toArray(): array {
         return [];
+    }
+
+    public function getEmployees(): array
+    {
+        return $this->employees;
     }
 }

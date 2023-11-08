@@ -41,19 +41,13 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toHTML(): string {
-        return sprintf("
-            <div class='user-card'>
-                <h2 class='avatar'>Employees</h2>
-                <p>id: %s</p>
-                <p>Job Title: %s</p>
-                <p>Salary: %s</p>
-                <p>Start Date: %s</p>
-            </div>",
-            $this->id,
-            $this->jobTitle,
-            number_format($this->salary, 2),
-            $this->startDate->format('Y-m-d'),
-        );
+        // 最低限のHTMLで従業員情報を形成
+        return "<div class='employee-info'>
+                    Job Title: $this->jobTitle<br>
+                    Salary: $this->salary<br>
+                    Start Date: " . $this->startDate->format('Y-m-d') . "<br>
+                    Awards: " . implode(', ', $this->awards) . "
+                </div>";
     }
 
     public function toMarkdown(): string {

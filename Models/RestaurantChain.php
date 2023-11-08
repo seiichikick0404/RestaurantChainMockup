@@ -8,7 +8,7 @@ use Models\FileConvertible;
 class RestaurantChain extends Company implements FileConvertible {
     private int $chainId;
 
-    private array $restaurantLocation;
+    private array $restaurantLocations;
 
     private string $cuisineType;
 
@@ -18,13 +18,13 @@ class RestaurantChain extends Company implements FileConvertible {
 
     public function __construct(
         int $chainId,
-        array $restaurantLocation,
+        array $restaurantLocations,
         string $cuisineType,
         int $numberOfLocations,
         string $parentCompany,
     ) {
         $this->chainId = $chainId;
-        $this->restaurantLocation = $restaurantLocation;
+        $this->restaurantLocations = $restaurantLocations;
         $this->cuisineType = $cuisineType;
         $this->numberOfLocations = $numberOfLocations;
         $this->parentCompany = $parentCompany;
@@ -35,7 +35,12 @@ class RestaurantChain extends Company implements FileConvertible {
     }
 
     public function toHTML(): string {
-        return ("");
+        // Company から継承された情報を含め、レストランチェーン情報を形成
+        $html = parent::toHTML(); // Company クラスの toHTML メソッドを利用
+        foreach ($this->restaurantLocations as $location) {
+            $html .= $location->toHTML();
+        }
+        return $html;
     }
 
     public function toMarkdown(): string {
@@ -44,5 +49,15 @@ class RestaurantChain extends Company implements FileConvertible {
 
     public function toArray(): array {
         return [];
+    }
+
+    public function getParentCompany(): string
+    {
+        return $this->parentCompany;
+    }
+
+    public function getRestaurantLocations(): array
+    {
+        return $this->restaurantLocations;
     }
 }
