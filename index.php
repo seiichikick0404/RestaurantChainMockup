@@ -9,23 +9,16 @@ use Helpers\RandomGenerator;
 require_once 'vendor/autoload.php';
 
 // クエリ文字列からパラメータを取得
-$min = $_GET['min'] ?? 1;
-$max = $_GET['max'] ?? 3;
+$min = $_GET['min'] ?? 3;
+$max = $_GET['max'] ?? 5;
 
 // パラメータが整数であることを確認
 $min = (int)$min;
 $max = (int)$max;
 
 
-
 // 会社とそのチェーン店配列を取得
 $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($min, $max);
-
-// var_dump($companiesRestaurantChains[0][1]);
-// exit;
-
-// 取得内容をフロントに出力
-
 
 
 ?>
@@ -35,8 +28,8 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>User Profiles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         /* ユーザーカードのスタイル */
     </style>
@@ -45,40 +38,58 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
 
 <body class="bg-light">
 
+    <?php $index = 0 ?>
     <div class="container mt-5">
-        <h2 class="mb-3 text-center">Restaurant Chain Rogahn, Ortiz and Stark</h2>
+        <?php foreach ($companiesRestaurantChains as [$company, $chains]): ?>
+            <h2 class="mb-3 text-center">
+                <?php echo $company->getName(); ?>
+            </h2>
 
-        <?php
-        foreach ($companiesRestaurantChains as [$company, $restaurantChains]) {
-            // ...[前のコード]...
+            <div class="container bg-primary p-3">
+                <h4>Restaurant Chain Information</h4>
+            </div>
 
-            foreach ($restaurantChains as $chain) {
-                echo "<div class='card mb-4 shadow-sm'>";
-                echo "<div class='card-header bg-primary text-white'>" . "ここは空欄" . "</div>";
-                echo "<div class='card-body'>";
-                
-                // 会社情報と関連するレストランの場所を表示
-                echo $company->toHTML();
+            <?php foreach ($chains as $chain): ?>
+                <div class="container custom-container">
+                    <?php
+                    $locations = $chain->getRestaurantLocations();
+                    foreach ($locations as $location):
+                        $index++;
+                    ?>
+                        <div class="accordion accordion-flush" id="accordionFlush<?php echo $index; ?>">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne<?php echo $index; ?>" aria-expanded="false" aria-controls="flush-collapseOne<?php echo $index; ?>">
+                                        <?php echo "<p>" . $location->getName() . "</p>"; ?>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne<?php echo $index; ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlush<?php echo $index; ?>">
+                                    <div class="accordion-body">
+                                        <?php echo $location->toHTML(); ?>
+                                        <div class="custom-border-bottom"></div>
+                                        <h5>Employees:</h5>
+                                        <?php foreach ($location->getEmployees() as $employee): ?>
+                                            <div class="container">
+                                                <table class="table custom-border">
+                                                    <tr>
+                                                        <td><?php echo $employee->toHTML(); ?></td>
+                                                    </tr>     
+                                                </table>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
 
-                foreach ($chain->getRestaurantLocations() as $location) {
-                    // ロケーションごとの従業員情報を表示
-                    echo "<ul class='list-group list-group-flush'>";
-                    foreach ($location->getEmployees() as $employee) {
-                        echo "<li class='list-group-item'>";
-                        echo "ID: " . "testid1111" . ", Job Title: " . "test job title" . ", ";
-                        echo "<span class='font-weight-bold'>" . "getNameを表示" . "</span>, ";
-                        echo "Start Date: " . "test start Date";
-                        echo "</li>";
-                    }
-                    echo "</ul>";
-                }
-                echo "</div>"; // card-body
-                echo "</div>"; // card
-            }
-        }
-        ?>
-        
-    </div>    
+        <?php endforeach; ?>
+    </div>
+    <!--  Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 </body>
 </html>

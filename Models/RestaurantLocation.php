@@ -50,12 +50,12 @@ class RestaurantLocation implements FileConvertible {
     }
 
     public function toHTML(): string {
-        $isOpenString = $this->isOpen ? "Open" : "Closed";
-        return "<div class='location-info'>
-                    <h2>$this->name</h2>
-                    <p>Address: $this->address, $this->city, $this->state, $this->zipCode
-                    Status: $isOpenString
-                </div>";
+        return sprintf(
+            '<p>Company Name: %s, Address: %s, Zip Code: %s</p>',
+            $this->name,
+            $this->address,
+            $this->zipCode,
+        );
     }
 
     public function toMarkdown(): string {

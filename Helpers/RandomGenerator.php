@@ -10,8 +10,6 @@ use Models\RestaurantLocation;
 use Models\Company;
 
 class RandomGenerator {
-
-    
     const MIN_RESTAURANT_CHAIN = 3;
     const MAX_RESTAURANT_CHAIN = 5;
     const MIN_EMPLOYEE = 2;
@@ -147,15 +145,15 @@ class RandomGenerator {
      * @param string $parentCompanyName
      * @return RestaurantChain
      */
-    public static function createRestaurantChain(string $parentCompanyName): RestaurantChain
+    public static function createRestaurantChain(Company $parentCompany): RestaurantChain
     {
         $faker = Factory::create();
 
         $chainId = $faker->randomNumber();
-        $parentCompany = $parentCompanyName;
         $cuisineType = $faker->randomElement(['Japanese', 'Italian', 'American', 'Mexican', 'Chinese']);
         $restaurantLocations = self::createRestaurantLocations(self::MIN_RESTAURANT_LOCATION, self::MAX_RESTAURANT_LOCATION);
         $numberOfLocations = count($restaurantLocations);
+        $parentCompany = $parentCompany;
 
         $restaurantChain = new RestaurantChain(
             $chainId,
@@ -176,14 +174,14 @@ class RandomGenerator {
      * @param int $max
      * @return array[RestaurantChain] $restaurantChains
      */
-    public static function createRestaurantChains(int $min, int $max, string $parentCompanyName): array
+    public static function createRestaurantChains(int $min, int $max, Company $parentCompany): array
     {
         $faker = Factory::create();
         $restaurantChains = [];
         $numOfRestaurantChains = $faker->numberBetween($min, $max);
 
         for ($i = 0; $i < $numOfRestaurantChains; $i++) {
-            $restaurantChains[] = self::createRestaurantChain($parentCompanyName);
+            $restaurantChains[] = self::createRestaurantChain($parentCompany);
         }
 
         return $restaurantChains;
@@ -240,9 +238,10 @@ class RandomGenerator {
         $companyRestaurantChains = [];
         for ($i= 0; $i < $numOfCompanies; $i++) {
             $company = self::createCompany();
+            
             $companyRestaurantChains[] =  [
                 $company,
-                self::createRestaurantChains(self::MIN_RESTAURANT_CHAIN, self::MAX_RESTAURANT_CHAIN, $company->getName())
+                self::createRestaurantChains(self::MIN_RESTAURANT_CHAIN, self::MAX_RESTAURANT_CHAIN, $company)
             ];
         }
 

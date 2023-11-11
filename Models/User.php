@@ -115,5 +115,15 @@ class User implements FileConvertible {
             'role' => $this->role
         ];
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->firstName . $this->lastName;
+    }
 }
 ?>

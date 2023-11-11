@@ -25,8 +25,6 @@ class Employee extends User implements FileConvertible {
         DateTime $startDate,
         array $awards,
     ) {
-        $faker = Factory::create();
-
         // 親クラスのコンストラクタを呼び出す
         parent::__construct();
 
@@ -41,9 +39,13 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toHTML(): string {
-        return "<li class='list-group-item'>
-            ID: $this->id, Job Title: $this->jobTitle, $this->firstName . $this->lastName, Start Date: " . $this->startDate->format('Y-m-d') . "
-        </li>";
+        return sprintf(
+            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s</p>",
+            parent::getID(),
+            $this->jobTitle,
+            parent::getFullName(),
+            $this->startDate,
+        );
     }
 
     public function toMarkdown(): string {

@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use Faker\Factory;
 use Models\Company;
 use Models\FileConvertible;
 
@@ -14,15 +15,33 @@ class RestaurantChain extends Company implements FileConvertible {
 
     private int $numberOfLocations;
 
-    private string $parentCompany;
+    private Company $parentCompany;
+
 
     public function __construct(
         int $chainId,
         array $restaurantLocations,
         string $cuisineType,
         int $numberOfLocations,
-        string $parentCompany,
+        Company $parentCompany,
     ) {
+        
+        parent::__construct(
+            $parentCompany->getName(),
+            $parentCompany->getFoundingYear(),
+            $parentCompany->getDescription(),
+            $parentCompany->getWebsite(),
+            $parentCompany->getPhone(),
+            $parentCompany->getIndustry(),
+            $parentCompany->getCeo(),
+            $parentCompany->getPubliclyTraded(),
+            $parentCompany->getCountry(),
+            $parentCompany->getFounder(),
+            $parentCompany->getTotalEmployees(),
+        );
+
+        $this->initCompany($parentCompany);
+
         $this->chainId = $chainId;
         $this->restaurantLocations = $restaurantLocations;
         $this->cuisineType = $cuisineType;
@@ -35,12 +54,10 @@ class RestaurantChain extends Company implements FileConvertible {
     }
 
     public function toHTML(): string {
-        // Company から継承された情報を含め、レストランチェーン情報を形成
-        $html = parent::toHTML(); // Company クラスの toHTML メソッドを利用
-        foreach ($this->restaurantLocations as $location) {
-            $html .= $location->toHTML();
-        }
-        return $html;
+        return sprintf(
+            "<h2>Restaurant Chain : %s</h2>",
+            $this->parentCompany->getName()
+        );
     }
 
     public function toMarkdown(): string {
@@ -51,7 +68,7 @@ class RestaurantChain extends Company implements FileConvertible {
         return [];
     }
 
-    public function getParentCompany(): string
+    public function getParentCompany(): Company
     {
         return $this->parentCompany;
     }
@@ -59,5 +76,20 @@ class RestaurantChain extends Company implements FileConvertible {
     public function getRestaurantLocations(): array
     {
         return $this->restaurantLocations;
+    }
+
+    private function initCompany(Company $company)
+    {
+        $company->setName($company->getName());
+        $company->setFoundingYear($company->getFoundingYear());
+        $company->setDescription($company->getDescription());
+        $company->setWebsite($company->getWebsite());
+        $company->setPhone($company->getPhone());
+        $company->setIndustry($company->getIndustry());
+        $company->setCeo($company->getCeo());
+        $company->setPubliclyTraded($company->getPubliclyTraded());
+        $company->setCountry($company->getCountry());
+        $company->setFounder($company->getFounder());
+        $company->setTotalEmployees($company->getTotalEmployees());
     }
 }

@@ -2,11 +2,12 @@
 
 namespace Models;
 
+use Faker\Factory;
 use Models\FileConvertible;
 
 class Company implements FileConvertible {
 
-    protected string $name;
+    public string $name;
 
     protected int $foundingYear;
 
@@ -61,18 +62,10 @@ class Company implements FileConvertible {
     }
 
     public function toHTML(): string {
-        $publiclyTradedString = $this->publiclyTraded ? "Yes" : "No";
-        // 最低限のHTMLで会社情報を形成
-        return "<div class='company-info'>
-                    <strong>$this->name</strong><br>
-                    Founded: $this->foundingYear<br>
-                    $this->description<br>
-                    <a href='$this->website'>$this->website</a><br>
-                    Phone: $this->phone<br>
-                    Industry: $this->industry<br>
-                    CEO: $this->ceo<br>
-                    Publicly Traded: $publiclyTradedString
-                </div>";
+        return sprintf(
+            "<h2>Restaurant Chain : %s</h2>",
+            $this->name
+        );
     }
 
     public function toMarkdown(): string {
@@ -83,12 +76,105 @@ class Company implements FileConvertible {
         return [];
     }
 
-
     /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getFoundingYear(): int
+    {
+        return $this->foundingYear;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getWebsite(): string
+    {
+        return $this->website;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getIndustry(): string
+    {
+        return $this->industry;
+    }
+
+    public function getCeo(): string
+    {
+        return $this->ceo;
+    }
+
+    public function getPubliclyTraded(): bool
+    {
+        return $this->publiclyTraded;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function getFounder(): string
+    {
+        return $this->founder;
+    }
+
+    public function getTotalEmployees(): int
+    {
+        return $this->totalEmployees;
+    }
+
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
+
+    public function setFoundingYear(int $foundingYear): void {
+        $this->foundingYear = $foundingYear;
+    }
+
+    public function setDescription(string $description): void {
+        $this->description = $description;
+    }
+
+    public function setWebsite(string $website): void {
+        $this->website = $website;
+    }
+
+    public function setPhone(string $phone): void {
+        $this->phone = $phone;
+    }
+
+    public function setIndustry(string $industry): void {
+        $this->industry = $industry;
+    }
+
+    public function setCeo(string $ceo): void {
+        $this->ceo = $ceo;
+    }
+
+    public function setPubliclyTraded(bool $publiclyTraded): void {
+        $this->publiclyTraded = $publiclyTraded;
+    }
+
+    public function setCountry(string $country): void {
+        $this->country = $country;
+    }
+
+    public function setFounder(string $founder): void {
+        $this->founder = $founder;
+    }
+
+    public function setTotalEmployees(int $totalEmployees): void {
+        $this->totalEmployees = $totalEmployees;
     }
 }
