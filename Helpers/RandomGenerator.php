@@ -14,8 +14,8 @@ class RandomGenerator {
     const MAX_RESTAURANT_CHAIN = 5;
     const MIN_EMPLOYEE = 2;
     const MAX_EMPLOYEE = 5;
-    const MIN_RESTAURANT_LOCATION = 2;
-    const MAX_RESTAURANT_LOCATION = 5;
+    const MIN_RESTAURANT_LOCATION = 1;
+    const MAX_RESTAURANT_LOCATION = 3;
 
 
 
@@ -76,7 +76,7 @@ class RandomGenerator {
         $numOfEmployees = $faker->numberBetween($min, $max);
 
         for ($i = 0; $i < $numOfEmployees; $i++) {
-            $employees[] = self::user();
+            $employees[] = self::createEmployee();
         }
 
         return $employees;

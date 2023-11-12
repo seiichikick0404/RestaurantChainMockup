@@ -44,7 +44,7 @@ class Employee extends User implements FileConvertible {
             parent::getID(),
             $this->jobTitle,
             parent::getFullName(),
-            $this->startDate,
+            $this->startDate->format('Y-m-d'),
         );
     }
 

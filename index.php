@@ -4,6 +4,7 @@ spl_autoload_extensions(".php");
 spl_autoload_register();
 
 use Helpers\RandomGenerator;
+use Models\Employee;
 
 // composerの依存関係のオートロード
 require_once 'vendor/autoload.php';
@@ -30,27 +31,28 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profiles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/style.css">
     <style>
-        /* ユーザーカードのスタイル */
+        
     </style>
 </head>
-<body>
 
 <body class="bg-light">
 
     <?php $index = 0 ?>
     <div class="container mt-5">
         <?php foreach ($companiesRestaurantChains as [$company, $chains]): ?>
-            <h2 class="mb-3 text-center">
-                <?php echo $company->getName(); ?>
-            </h2>
+            <div class="container custom-container">
+                <h2 class="mb-3 text-center">
+                    <?php echo $company->getName(); ?>
+                </h2>
 
-            <div class="container bg-primary p-3">
-                <h4>Restaurant Chain Information</h4>
-            </div>
+                <div class="container bg-primary p-3">
+                    <h4 class="accordion-header">Restaurant Chain Information</h4>
+                </div>
 
-            <?php foreach ($chains as $chain): ?>
-                <div class="container custom-container">
+                <?php foreach ($chains as $chain): ?>
+                
                     <?php
                     $locations = $chain->getRestaurantLocations();
                     foreach ($locations as $location):
@@ -71,9 +73,11 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
                                         <?php foreach ($location->getEmployees() as $employee): ?>
                                             <div class="container">
                                                 <table class="table custom-border">
+                                                    <tbody>
                                                     <tr>
-                                                        <td><?php echo $employee->toHTML(); ?></td>
-                                                    </tr>     
+                                                        <td class="table-secondary"><?php echo $employee->toHTML(); ?></td>
+                                                    </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         <?php endforeach; ?>
@@ -82,9 +86,8 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
                             </div>
                         </div>
                     <?php endforeach; ?>
-                </div>
-            <?php endforeach; ?>
-
+                <?php endforeach; ?>
+            </div>
         <?php endforeach; ?>
     </div>
     <!--  Separate Popper and Bootstrap JS -->
