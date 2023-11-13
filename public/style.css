@@ -11,3 +11,7 @@
 .custom-container {
   margin-bottom: 3rem;
 }
+
+.accordion-header {
+  color: white;
+}
