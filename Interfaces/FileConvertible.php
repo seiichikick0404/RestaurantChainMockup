@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Interfaces;
 
 interface FileConvertible {
     public function toString(): string;

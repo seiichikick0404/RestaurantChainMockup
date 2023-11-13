@@ -3,7 +3,7 @@
 namespace Models;
 
 use Faker\Factory;
-use Models\FileConvertible;
+use Interfaces\FileConvertible;
 
 class Company implements FileConvertible {
 

@@ -3,7 +3,7 @@
 namespace Models;
 
 use DateTime;
-use Models\FileConvertible;
+use Interfaces\FileConvertible;
 use Faker\Factory;
 
 class User implements FileConvertible {

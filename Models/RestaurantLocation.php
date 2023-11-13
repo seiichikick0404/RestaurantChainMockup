@@ -4,7 +4,7 @@ namespace Models;
 
 use Faker\Extension\FileExtension;
 use Models\Employee;
-use Models\FileConvertible;
+use Interfaces\FileConvertible;
 
 class RestaurantLocation implements FileConvertible {
 

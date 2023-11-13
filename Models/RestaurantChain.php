@@ -4,7 +4,7 @@ namespace Models;
 
 use Faker\Factory;
 use Models\Company;
-use Models\FileConvertible;
+use Interfaces\FileConvertible;
 
 class RestaurantChain extends Company implements FileConvertible {
     private int $chainId;
