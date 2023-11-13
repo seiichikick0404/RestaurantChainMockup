@@ -56,5 +56,25 @@ class Employee extends User implements FileConvertible {
         return [];
     }
 
+    public function getJobTitle(): string
+    {
+        return $this->jobTitle;
+    }
+
+    public function getSalary(): float
+    {
+        return $this->salary;
+    }
+
+    public function getStartDate(): DateTime
+    {
+        return $this->startDate;
+    }
+
+    public function getAwards(): array
+    {
+        return $this->awards;
+    }
+
     
 }

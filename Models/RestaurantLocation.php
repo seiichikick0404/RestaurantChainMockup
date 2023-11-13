@@ -66,13 +66,35 @@ class RestaurantLocation implements FileConvertible {
         return [];
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    public function getZipCode(): string
+    {
+        return $this->zipCode;
+    }
+
     public function getEmployees(): array
     {
         return $this->employees;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    
 }

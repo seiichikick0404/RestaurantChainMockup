@@ -40,8 +40,6 @@ class RestaurantChain extends Company implements FileConvertible {
             $parentCompany->getTotalEmployees(),
         );
 
-        $this->initCompany($parentCompany);
-
         $this->chainId = $chainId;
         $this->restaurantLocations = $restaurantLocations;
         $this->cuisineType = $cuisineType;
@@ -78,18 +76,18 @@ class RestaurantChain extends Company implements FileConvertible {
         return $this->restaurantLocations;
     }
 
-    private function initCompany(Company $company)
+    public function getChainId(): int
     {
-        $company->setName($company->getName());
-        $company->setFoundingYear($company->getFoundingYear());
-        $company->setDescription($company->getDescription());
-        $company->setWebsite($company->getWebsite());
-        $company->setPhone($company->getPhone());
-        $company->setIndustry($company->getIndustry());
-        $company->setCeo($company->getCeo());
-        $company->setPubliclyTraded($company->getPubliclyTraded());
-        $company->setCountry($company->getCountry());
-        $company->setFounder($company->getFounder());
-        $company->setTotalEmployees($company->getTotalEmployees());
+        return $this->chainId;
+    }
+
+    public function getCuisineType(): string
+    {
+        return $this->cuisineType;
+    }
+
+    public function getNumberOfLocations(): int
+    {
+        return $this->numberOfLocations;
     }
 }
