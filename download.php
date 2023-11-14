@@ -6,9 +6,28 @@ require_once 'vendor/autoload.php';
 use Helpers\RandomGenerator;
 use Faker\Factory;
 
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo "POST通信以外受け付けません";
+    exit();
+}
+
 // POSTリクエストからパラメータを取得
-$count = $_POST['count'] ?? 5;
-$format = $_POST['format'] ?? 'html';
+$employeeCount = (int)$_POST['employeeCount'] ?? 3;
+$salaryRange = (int)$_POST['salaryRange'] ?? 30000;
+$locationCount = (int)$_POST['locationCount'] ?? 3;
+$postalCodeMin = $_POST['postalCodeMin'] ?? "000-0000";
+$postalCodeMax = $_POST['postalCodeMax'] ?? "999-9999";
+$fileType = $_POST['fileType'] ?? "html";
+
+
+var_dump($employeeCount);
+var_dump($salaryRange);
+var_dump($locationCount);
+var_dump($postalCodeMin);
+var_dump($postalCodeMax);
+var_dump($fileType);
+
 
 // パラメータが正しい形式であることを確認
 $count = (int)$count;

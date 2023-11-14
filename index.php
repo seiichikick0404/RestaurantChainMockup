@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>フォームサンプル</title>
+    <title>入力フォーム</title>
     <!-- Bootstrap CSSの読み込み -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <div class="container mt-5">
-        <h2>フォーム</h2>
-        <form>
+        <h2>Restaurant-Chain-Mockup 入力フォーム</h2>
+        <form action="./download.php" method="post">
             <!-- 従業員数の選択 -->
             <div class="form-group">
                 <label for="locationCount">従業員数</label>
-                <input type="number" name="employeeCount" class="form-control" id="locationCount" value="1">
+                <input type="number" name="employeeCount" class="form-control" id="locationCount" value="3" required>
             </div>
 
             <!-- 給与範囲の選択（ドル表記） -->
             <div class="form-group">
                 <label for="salaryRange">給与範囲（ドル）</label>
-                <select class="form-control" id="salaryRange" name="salaryRange">
-                    <option>$30,000-$50,000</option>
-                    <option>$50,001-$70,000</option>
-                    <option>$70,001-$90,000</option>
-                    <option>$90,001+</option>
+                <select class="form-control" id="salaryRange" name="salaryRange" required>
+                    <option value="30000">$30,000-$49,999</option>
+                    <option value="50000">$50,000-$69,999</option>
+                    <option value="70000">$70,000-$89,999</option>
+                    <option value="90000">$90,000+</option>
                 </select>
             </div>
 
             <!-- 場所の数の入力 -->
             <div class="form-group">
-                <label for="locationCount">場所の数</label>
-                <input type="number" class="form-control" id="locationCount" name="locationCount">
+                <label for="locationCount">ロケーションの数</label>
+                <input type="number" class="form-control" id="locationCount" name="locationCount" value="3" required>
             </div>
 
             <!-- 郵便番号範囲の設定 -->
             <div class="form-group">
                 <label for="postalCodeMin">郵便番号 最小値</label>
-                <input type="text" class="form-control" id="postalCodeMin" name="postalCodeMin">
+                <input type="text" class="form-control" id="postalCodeMin" name="postalCodeMin" pattern="[0-9]{3}-[0-9]{4}" placeholder="123-4567" required>
                 <label for="postalCodeMax">郵便番号 最大値</label>
-                <input type="text" class="form-control" id="postalCodeMax" name="postalCodeMax">
+                <input type="text" class="form-control" id="postalCodeMax" name="postalCodeMax" pattern="[0-9]{3}-[0-9]{4}" placeholder="123-4567" required>
             </div>
 
             <!-- ファイルタイプの選択 -->
@@ -45,7 +45,7 @@
                 <label>ファイルタイプ</label>
                 <div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="fileType" id="html" value="html">
+                        <input class="form-check-input" type="radio" name="fileType" id="html" value="html" checked>
                         <label class="form-check-label" for="html">HTML</label>
                     </div>
                     <div class="form-check form-check-inline">
