@@ -20,13 +20,34 @@ class Employee extends User implements FileConvertible {
     private array $awards;
 
     public function __construct(
+        int $id,
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $hashedPassword,
+        string $phoneNumber,
+        string $address,
+        DateTime $birthDate,
+        DateTime $membershipExpirationDate,
+        string $role,
         string $jobTitle,
         float $salary,
         DateTime $startDate,
         array $awards,
     ) {
         // 親クラスのコンストラクタを呼び出す
-        parent::__construct();
+        parent::__construct(
+            $id,
+            $firstName,
+            $lastName,
+            $email,
+            $hashedPassword,
+            $phoneNumber,
+            $address,
+            $birthDate,
+            $membershipExpirationDate,
+            $role,
+        );
 
         $this->jobTitle = $jobTitle;
         $this->salary = $salary;

@@ -7,7 +7,7 @@ use Interfaces\FileConvertible;
 
 class Company implements FileConvertible {
 
-    public string $name;
+    protected string $name;
 
     protected int $foundingYear;
 

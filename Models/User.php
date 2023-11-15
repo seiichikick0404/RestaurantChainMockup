@@ -18,18 +18,28 @@ class User implements FileConvertible {
     protected DateTime $membershipExpirationDate;
     protected string $role;
 
-    public function __construct() {
-        $faker =  Factory::create();
-        $this->id = $faker->randomNumber();
-        $this->firstName = $faker->firstName();
-        $this->lastName = $faker->lastName();
-        $this->email = $faker->email;
-        $this->hashedPassword = $faker->password;
-        $this->phoneNumber = $faker->phoneNumber;
-        $this->address = $faker->address;
-        $this->birthDate = $faker->dateTimeThisCentury;
-        $this->membershipExpirationDate = $faker->dateTimeBetween('-10 years', '+20 years');
-        $this->role = $faker->randomElement(['admin', 'user', 'editor']);
+    public function __construct(
+        int $id,
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $hashedPassword,
+        string $phoneNumber,
+        string $address,
+        DateTime $birthDate,
+        DateTime $membershipExpirationDate,
+        string $role,
+    ) {
+        $this->id = $id;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->hashedPassword = $hashedPassword;
+        $this->phoneNumber = $phoneNumber;
+        $this->address = $address;
+        $this->birthDate = $birthDate;
+        $this->membershipExpirationDate = $membershipExpirationDate;
+        $this->role = $role;
     }
 
     public function login(string $password): bool {

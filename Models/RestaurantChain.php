@@ -15,29 +15,40 @@ class RestaurantChain extends Company implements FileConvertible {
 
     private int $numberOfLocations;
 
-    private Company $parentCompany;
+    private string $parentCompany;
 
 
     public function __construct(
+        string $name,
+        int $foundingYear,
+        string $description,
+        string $website,
+        string $phone,
+        string $industry,
+        string $ceo,
+        bool $publiclyTraded,
+        string $country,
+        string $founder,
+        int $totalEmployees,
         int $chainId,
         array $restaurantLocations,
         string $cuisineType,
         int $numberOfLocations,
-        Company $parentCompany,
+        string $parentCompany,
     ) {
         
         parent::__construct(
-            $parentCompany->getName(),
-            $parentCompany->getFoundingYear(),
-            $parentCompany->getDescription(),
-            $parentCompany->getWebsite(),
-            $parentCompany->getPhone(),
-            $parentCompany->getIndustry(),
-            $parentCompany->getCeo(),
-            $parentCompany->getPubliclyTraded(),
-            $parentCompany->getCountry(),
-            $parentCompany->getFounder(),
-            $parentCompany->getTotalEmployees(),
+            $name,
+            $foundingYear,
+            $description,
+            $website,
+            $phone,
+            $industry,
+            $ceo,
+            $publiclyTraded,
+            $country,
+            $founder,
+            $totalEmployees,
         );
 
         $this->chainId = $chainId;
@@ -54,7 +65,7 @@ class RestaurantChain extends Company implements FileConvertible {
     public function toHTML(): string {
         return sprintf(
             "<h2>Restaurant Chain : %s</h2>",
-            $this->parentCompany->getName()
+            $this->name
         );
     }
 
@@ -66,7 +77,7 @@ class RestaurantChain extends Company implements FileConvertible {
         return [];
     }
 
-    public function getParentCompany(): Company
+    public function getParentCompany(): string
     {
         return $this->parentCompany;
     }
