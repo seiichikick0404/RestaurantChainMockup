@@ -1,25 +1,25 @@
 <?php
-// コードベースのファイルのオートロード
-spl_autoload_extensions(".php"); 
-spl_autoload_register();
+// // コードベースのファイルのオートロード
+// spl_autoload_extensions(".php"); 
+// spl_autoload_register();
 
-use Helpers\RandomGenerator;
-use Models\Employee;
+// use Helpers\RandomGenerator;
+// use Models\Employee;
 
-// composerの依存関係のオートロード
-require_once 'vendor/autoload.php';
+// // composerの依存関係のオートロード
+// require_once 'vendor/autoload.php';
 
-// クエリ文字列からパラメータを取得
-$min = $_GET['min'] ?? 3;
-$max = $_GET['max'] ?? 5;
+// // クエリ文字列からパラメータを取得
+// $min = $_GET['min'] ?? 3;
+// $max = $_GET['max'] ?? 5;
 
-// パラメータが整数であることを確認
-$min = (int)$min;
-$max = (int)$max;
+// // パラメータが整数であることを確認
+// $min = (int)$min;
+// $max = (int)$max;
 
 
-// 会社とそのチェーン店配列を取得
-$companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($min, $max);
+// // 会社とそのチェーン店配列を取得
+// $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($min, $max);
 
 
 ?>
@@ -41,51 +41,48 @@ $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($m
 
     <?php $index = 0 ?>
     <div class="container mt-5">
-        <?php foreach ($companiesRestaurantChains as [$company, $chains]): ?>
+        <?php foreach ($restaurantChains as $chainIndex => $chain): ?>
             <div class="container custom-container">
                 <h2 class="mb-3 text-center">
-                    <?php echo $company->getName(); ?>
+                    <?php echo $chain->getName(); ?>
                 </h2>
 
                 <div class="container bg-primary p-3">
                     <h4 class="accordion-header">Restaurant Chain Information</h4>
                 </div>
 
-                <?php foreach ($chains as $chain): ?>
-                
-                    <?php
-                    $locations = $chain->getRestaurantLocations();
-                    foreach ($locations as $location):
-                        $index++;
-                    ?>
-                        <div class="accordion accordion-flush" id="accordionFlush<?php echo $index; ?>">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne<?php echo $index; ?>" aria-expanded="false" aria-controls="flush-collapseOne<?php echo $index; ?>">
-                                        <?php echo "<p>" . $location->getName() . "</p>"; ?>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne<?php echo $index; ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlush<?php echo $index; ?>">
-                                    <div class="accordion-body">
-                                        <?php echo $location->toHTML(); ?>
-                                        <div class="custom-border-bottom"></div>
-                                        <h5>Employees:</h5>
-                                        <?php foreach ($location->getEmployees() as $employee): ?>
-                                            <div class="container">
-                                                <table class="table custom-border">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td class="table-secondary"><?php echo $employee->toHTML(); ?></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
+                <?php
+                $locations = $chain->getRestaurantLocations();
+                foreach ($locations as $location):
+                    $index++;
+                ?>
+                    <div class="accordion accordion-flush" id="accordionFlush<?php echo $index; ?>">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne<?php echo $index; ?>" aria-expanded="false" aria-controls="flush-collapseOne<?php echo $index; ?>">
+                                    <?php echo "<p>" . $location->getName() . "</p>"; ?>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne<?php echo $index; ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlush<?php echo $index; ?>">
+                                <div class="accordion-body">
+                                    <?php echo $location->toHTML(); ?>
+                                    <div class="custom-border-bottom"></div>
+                                    <h5>Employees:</h5>
+                                    <?php foreach ($location->getEmployees() as $employee): ?>
+                                        <div class="container">
+                                            <table class="table custom-border">
+                                                <tbody>
+                                                <tr>
+                                                    <td class="table-secondary"><?php echo $employee->toHTML(); ?></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
