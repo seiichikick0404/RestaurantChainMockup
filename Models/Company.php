@@ -58,8 +58,22 @@ class Company implements FileConvertible {
 
 
     public function toString(): string {
-        return "";
+        return sprintf(
+            "Name: %s\nFounding Year: %d\nDescription: %s\nWebsite: %s\nPhone: %s\nIndustry: %s\nCEO: %s\nPublicly Traded: %s\nCountry: %s\nFounder: %s\nTotal Employees: %d",
+            $this->name,
+            $this->foundingYear,
+            $this->description,
+            $this->website,
+            $this->phone,
+            $this->industry,
+            $this->ceo,
+            $this->publiclyTraded ? 'Yes' : 'No',
+            $this->country,
+            $this->founder,
+            $this->totalEmployees
+        );
     }
+
 
     public function toHTML(): string {
         return sprintf(
@@ -69,12 +83,35 @@ class Company implements FileConvertible {
     }
 
     public function toMarkdown(): string {
-        return "";
+        return " - name: {$this->name}
+                 - foundingYear: {$this->foundingYear}
+                 - description: {$this->description}
+                 - website: {$this->website}
+                 - phone: {$this->phone}
+                 - industry: ($this->industry)
+                 - ceo: {$this->ceo}
+                 - publiclyTraded: {$this->publiclyTraded}
+                 - country: {$this->country}
+                 - founder: {$this->founder}
+                 - totalEmployees: {$this->totalEmployees}";
     }
 
     public function toArray(): array {
-        return [];
+        return [
+            'name' => $this->name,
+            'foundingYear' => $this->foundingYear,
+            'description' => $this->description,
+            'website' => $this->website,
+            'phone' => $this->phone,
+            'industry' => $this->industry,
+            'ceo' => $this->ceo,
+            'publiclyTraded' => $this->publiclyTraded,
+            'country' => $this->country,
+            'founder' => $this->founder,
+            'totalEmployees' => $this->totalEmployees
+        ];
     }
+
 
     /**
      * @return string

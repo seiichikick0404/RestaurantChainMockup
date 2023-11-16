@@ -4,6 +4,7 @@ spl_autoload_register();
 require_once 'vendor/autoload.php';
 
 use Helpers\RandomGenerator;
+use Helpers\DrawHelper;
 use Faker\Factory;
 
 
@@ -64,24 +65,24 @@ $restaurantChains = RandomGenerator::createRestaurantChains(
 );
 
 // TODO オブジェクトは良い感じに生成できているのであとは以下のタスク
-// 1. json形式で出力できるようにする
-// 2. TXT形式で出力できるようにする
+// 1. json形式でDLできるようにする
+// 2. TXT形式でDLできるようにする
+// 3. マークダウン形式でDLできるようにする
 // 3. 新たなオブジェクト構造でmain.phpを出力する
-var_dump($restaurantChains);
-exit;
 
-if ($format === 'markdown') {
+// var_dump($restaurantChains);
+// exit;
+
+if ($fileType === 'markdown') {
     header('Content-Type: text/markdown');
     header('Content-Disposition: attachment; filename="users.md"');
-    foreach ($users as $user) {
-        echo $user->toMarkdown();
-    }
-} elseif ($format === 'json') {
+    DrawHelper::drawMarkdown($restaurantChains);
+} elseif ($fileType === 'json') {
     header('Content-Type: application/json');
     header('Content-Disposition: attachment; filename="users.json"');
     $usersArray = array_map(fn($user) => $user->toArray(), $users);
     echo json_encode($usersArray);
-} elseif ($format === 'txt') {
+} elseif ($fileType === 'txt') {
     header('Content-Type: text/plain');
     header('Content-Disposition: attachment; filename="users.txt"');
     foreach ($users as $user) {
@@ -90,6 +91,6 @@ if ($format === 'markdown') {
 } else {
     // HTMLをデフォルトに
     header('Content-Type: text/html');
-    
+
     include "main.php";
 }

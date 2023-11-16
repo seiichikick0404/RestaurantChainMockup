@@ -70,7 +70,7 @@ class RestaurantChain extends Company implements FileConvertible {
     }
 
     public function toMarkdown(): string {
-        return "";
+        return "# Restaurant Chain : ". $this->getName()."\n# (Number of location : ".$this->numberOfLocations.")\n";
     }
 
     public function toArray(): array {

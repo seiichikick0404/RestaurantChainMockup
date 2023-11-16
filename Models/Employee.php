@@ -56,7 +56,13 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toString(): string {
-        return "";
+        return sprintf(
+            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s</p>",
+            parent::getID(),
+            $this->jobTitle,
+            parent::getFullName(),
+            $this->startDate->format('Y-m-d'),
+        );
     }
 
     public function toHTML(): string {
@@ -70,11 +76,16 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toMarkdown(): string {
-        return "";
+        return "- ID: ".parent::getID().", Job Title: ".$this->jobTitle.", Name: ".parent::getFullName().", Start Date: ".$this->startDate->format('Y-m-d').",  Salary: $".$this->salary."\n";
     }
 
     public function toArray(): array {
-        return [];
+        return [
+            'id' => parent::getId(),
+            'jobTitle' => $this->jobTitle,
+            'fullName' => $this->getFullName(),
+            'startDate' => $this->getStartDate(),
+        ];
     }
 
     public function getJobTitle(): string
