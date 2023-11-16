@@ -67,7 +67,7 @@ $restaurantChains = RandomGenerator::createRestaurantChains(
 // TODO オブジェクトは良い感じに生成できているのであとは以下のタスク
 // 1. json形式でDLできるようにする
 // 2. TXT形式でDLできるようにする
-// 3. マークダウン形式でDLできるようにする
+// 3. マークダウン形式でDLできるようにする  OK
 // 3. 新たなオブジェクト構造でmain.phpを出力する
 
 // var_dump($restaurantChains);
@@ -80,8 +80,7 @@ if ($fileType === 'markdown') {
 } elseif ($fileType === 'json') {
     header('Content-Type: application/json');
     header('Content-Disposition: attachment; filename="users.json"');
-    $usersArray = array_map(fn($user) => $user->toArray(), $users);
-    echo json_encode($usersArray);
+    DrawHelper::drawJson($restaurantChains);
 } elseif ($fileType === 'txt') {
     header('Content-Type: text/plain');
     header('Content-Disposition: attachment; filename="users.txt"');

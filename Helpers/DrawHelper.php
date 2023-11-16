@@ -25,4 +25,51 @@ class DrawHelper {
             }
         }
     }
+
+    /**
+     * JSONで表示
+     * 
+     * @param array<RestaurantChain> $restaurantChains
+     * @return void
+     */
+    public static function drawJson(array $restaurantChains): void
+    {
+        $data = [];
+        foreach ($restaurantChains as $index => $restaurantChain) {
+            $chainData = [
+                'restaurantChain' => $restaurantChain->getName(),
+                'numberOfLocation' => $restaurantChain->getNumberOfLocations(),
+                'restaurantLocations' => []
+            ];
+
+            foreach ($restaurantChain->getRestaurantLocations() as $location) {
+                $locationData = [
+                    'name' => ['name' => $location->getName()],
+                    'detail' => [
+                        'name' => $location->getName(),
+                        'address' => $location->getAddress(),
+                        'zipCode' => $location->getZipCode()
+                    ],
+                    'employees' => []
+                ];
+
+                foreach ($location->getEmployees() as $employee) {
+                    $employeeData = [
+                        'id' => $employee->getId(),
+                        'jobTitle' => $employee->getJobTitle(),
+                        'name' => $employee->getFullName(),
+                        'startDate' => $employee->getStartDate()->format('Y-m-d'),
+                        'salary' => $employee->getSalary()
+                    ];
+                    $locationData['employees'][] = $employeeData;
+                }
+
+                $chainData['restaurantLocations'][] = $locationData;
+            }
+
+            $data["restaurantChains" . ($index + 1)] = $chainData;
+        }
+
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
 }
