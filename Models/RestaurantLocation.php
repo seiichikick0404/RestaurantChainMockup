@@ -46,13 +46,12 @@ class RestaurantLocation implements FileConvertible {
     }
 
     public function toString(): string {
-        return sprintf(
-            '<p>Company Name: %s, Address: %s, Zip Code: %s</p>',
-            $this->name,
-            $this->address,
-            $this->zipCode,
-        );
+        return "  [Locations]\n" .
+               "  Name: " . $this->name . "\n" .
+               "  Address: " . $this->address . "\n" .
+               "  Zip Code: " . $this->zipCode . "\n\n";
     }
+    
 
     public function toHTML(): string {
         return sprintf(

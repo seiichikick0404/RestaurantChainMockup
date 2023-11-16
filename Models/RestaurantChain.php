@@ -36,7 +36,6 @@ class RestaurantChain extends Company implements FileConvertible {
         int $numberOfLocations,
         string $parentCompany,
     ) {
-        
         parent::__construct(
             $name,
             $foundingYear,
@@ -59,7 +58,11 @@ class RestaurantChain extends Company implements FileConvertible {
     }
 
     public function toString(): string {
-        return "";
+        return "[Restaurant Chain]\n" .
+               "Name: " . $this->name . "\n" .
+               "Cuisine Type: " . $this->cuisineType . "\n" .
+               "Number of Locations: " . $this->numberOfLocations . "\n" .
+               "Parent Company: " . $this->parentCompany . "\n\n";
     }
 
     public function toHTML(): string {

@@ -56,14 +56,13 @@ class Employee extends User implements FileConvertible {
     }
 
     public function toString(): string {
-        return sprintf(
-            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s</p>",
-            parent::getID(),
-            $this->jobTitle,
-            parent::getFullName(),
-            $this->startDate->format('Y-m-d'),
-        );
+        return "    [Employees]\n" .
+               "    Name: " . $this->getFullName() . "\n" .
+               "    Job Title: " . $this->jobTitle . "\n" .
+               "    Start Date: " . $this->startDate->format('Y-m-d') . "\n" .
+               "    Salary: " . $this->salary . "\n\n";
     }
+
 
     public function toHTML(): string {
         return sprintf(

@@ -84,9 +84,7 @@ if ($fileType === 'markdown') {
 } elseif ($fileType === 'txt') {
     header('Content-Type: text/plain');
     header('Content-Disposition: attachment; filename="users.txt"');
-    foreach ($users as $user) {
-        echo $user->toString();
-    }
+    DrawHelper::drawText($restaurantChains);
 } else {
     // HTMLをデフォルトに
     header('Content-Type: text/html');

@@ -8,7 +8,7 @@ class DrawHelper {
     /**
      * マークダウンで表示
      * 
-     * @param restaurantChains<RestaurantChain> $restaurantChains
+     * @param array<RestaurantChain> $restaurantChains
      * @return void
      */
     public static function drawMarkdown(array $restaurantChains): void
@@ -71,5 +71,26 @@ class DrawHelper {
         }
 
         echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * テキスト形式で出力
+     * 
+     * @param array<RestaurantChain> $restaurantChains
+     * @return void
+     */
+    public static function drawText(array $restaurantChains): void
+    {
+        foreach ($restaurantChains as $restaurantChain) {
+            echo $restaurantChain->toString();
+
+            foreach ($restaurantChain->getRestaurantLocations() as $restaurantLocation) {
+                echo $restaurantLocation->toString();
+
+                foreach ($restaurantLocation->getEmployees() as $employee) {
+                    echo $employee->toString();
+                }
+            }
+        }
     }
 }
