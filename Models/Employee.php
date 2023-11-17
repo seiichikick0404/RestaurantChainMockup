@@ -66,11 +66,12 @@ class Employee extends User implements FileConvertible {
 
     public function toHTML(): string {
         return sprintf(
-            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s</p>",
+            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s, Salary: $%s</p>",
             parent::getID(),
             $this->jobTitle,
             parent::getFullName(),
             $this->startDate->format('Y-m-d'),
+            number_format($this->salary, 2, '.', ',')
         );
     }
 

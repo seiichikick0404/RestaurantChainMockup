@@ -123,8 +123,20 @@ class RandomGenerator {
         $name = $faker->company;
         $address = $faker->streetAddress;
         $city = $faker->city;
-        $state = $faker->state; // TODO postalCodeを使う
-        $zipCode = $faker->postcode;
+        $state = $faker->state;
+
+        // 郵便番号の形式に合わせてランダムな数値を生成
+        $zipPrefixMin = substr($postalCodeMin, 0, 3);
+        $zipPrefixMax = substr($postalCodeMax, 0, 3);
+        $zipSuffixMin = substr($postalCodeMin, 4, 4);
+        $zipSuffixMax = substr($postalCodeMax, 4, 4);
+
+        $zipPrefix = $faker->numberBetween($zipPrefixMin, $zipPrefixMax);
+        $zipSuffix = $faker->numberBetween($zipSuffixMin, $zipSuffixMax);
+
+        // ゼロパディングを行う
+        $zipCode = str_pad($zipPrefix, 3, "0", STR_PAD_LEFT) . '-' .
+                    str_pad($zipSuffix, 4, "0", STR_PAD_LEFT);
 
         // 従業員の配列を生成
         $employees = self::createEmployees($employeeCount, $salaryRange);
@@ -287,66 +299,5 @@ class RandomGenerator {
 
         return $restaurantChains;
     }
-
-    // /**
-    //  * 親会社の生成
-    //  * 
-    //  * @param Company
-    //  */
-    // public static function createCompany(): Company
-    // {
-    //     $faker = Factory::create();
-
-    //     $name = $faker->company;
-    //     $foundingYear = $faker->numberBetween(1800, 2020);
-    //     $description = $faker->catchPhrase;
-    //     $website = $faker->domainName;
-    //     $phone = $faker->phoneNumber;
-    //     $industry = $faker->word;
-    //     $ceo = $faker->name;
-    //     $publiclyTraded = $faker->boolean;
-    //     $country = $faker->country;
-    //     $founder = $faker->name;
-    //     $totalEmployees = $faker->numberBetween(50, 10000);
-
-    //     return new Company(
-    //         $name,
-    //         $foundingYear,
-    //         $description,
-    //         $website,
-    //         $phone,
-    //         $industry,
-    //         $ceo,
-    //         $publiclyTraded,
-    //         $country,
-    //         $founder,
-    //         $totalEmployees
-    //     );
-    // }
-
-    // /**
-    //  * 親会社を複数生成するのと同時に紐づくチェーンの配列を返す
-    //  * 
-    //  * @param int $min
-    //  * @param int $max
-    //  * @return array[Company, [RestaurantChain]]
-    //  */
-    // public static function createCompaniesRestaurantChains($min, $max): array
-    // {
-    //     $faker = Factory::create();
-    //     $numOfCompanies = $faker->numberBetween($min, $max);
-
-    //     $companyRestaurantChains = [];
-    //     for ($i= 0; $i < $numOfCompanies; $i++) {
-    //         $company = self::createCompany();
-            
-    //         $companyRestaurantChains[] =  [
-    //             $company,
-    //             self::createRestaurantChains(self::MIN_RESTAURANT_CHAIN, self::MAX_RESTAURANT_CHAIN, $company)
-    //         ];
-    //     }
-
-    //     return $companyRestaurantChains;
-    // }
 }
 ?>

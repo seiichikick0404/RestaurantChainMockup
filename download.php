@@ -29,14 +29,6 @@ $postalCodeMax = $_POST['postalCodeMax'] ?? "999-9999";
 $fileType = $_POST['fileType'] ?? "html";
 
 
-// var_dump($employeeCount);
-// var_dump($salaryRange);
-// var_dump($locationCount);
-// var_dump($postalCodeMin);
-// var_dump($postalCodeMax);
-// var_dump($fileType);
-
-
 // 必須パラメータの確認
 if (is_null($employeeCount) || is_null($salaryRange) || is_null($locationCount) || 
     is_null($postalCodeMin) || is_null($postalCodeMax) || is_null($fileType)) {
@@ -52,8 +44,7 @@ if (!is_numeric($locationCount) || $locationCount < 1 || $locationCount > 100) {
 }
 
 
-// ユーザーを生成
-// TODO createEmployeesで指定数の従業員を生成する
+// チェーン店を生成
 $restaurantChains = RandomGenerator::createRestaurantChains(
     $min,
     $max,
@@ -63,15 +54,6 @@ $restaurantChains = RandomGenerator::createRestaurantChains(
     $postalCodeMin,
     $postalCodeMax,
 );
-
-// TODO オブジェクトは良い感じに生成できているのであとは以下のタスク
-// 1. json形式でDLできるようにする
-// 2. TXT形式でDLできるようにする
-// 3. マークダウン形式でDLできるようにする  OK
-// 3. 新たなオブジェクト構造でmain.phpを出力する
-
-// var_dump($restaurantChains);
-// exit;
 
 if ($fileType === 'markdown') {
     header('Content-Type: text/markdown');
@@ -86,7 +68,6 @@ if ($fileType === 'markdown') {
     header('Content-Disposition: attachment; filename="users.txt"');
     DrawHelper::drawText($restaurantChains);
 } else {
-    // HTMLをデフォルトに
     header('Content-Type: text/html');
 
     include "main.php";
