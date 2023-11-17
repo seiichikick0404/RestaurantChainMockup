@@ -70,30 +70,15 @@ class RandomGenerator {
     }
 
     /**
-     * レストランロケーションの生成
+     * 指定された範囲内で郵便番号を生成する
      *
-     * @param int $employeeCount
-     * @param int $salaryRange
-     * @param string $postalCodeMin,
-     * @param string $postalCodeMax
-     * @return RestaurantLocation
+     * @param string $postalCodeMin 最小郵便番号
+     * @param string $postalCodeMax 最大郵便番号
+     * @return string 生成された郵便番号
      */
-    public static function createRestaurantLocation(
-        int $employeeCount,
-        int $salaryRange,
-        string $postalCodeMin,
-        string $postalCodeMax
-    ): RestaurantLocation
-    {
+    private static function generateZipCodeInRange(string $postalCodeMin, string $postalCodeMax): string {
         $faker = Factory::create();
 
-        // ランダムな値でレストランの詳細を生成
-        $name = $faker->company;
-        $address = $faker->streetAddress;
-        $city = $faker->city;
-        $state = $faker->state;
-
-        // 郵便番号の形式に合わせてランダムな数値を生成
         $zipPrefixMin = substr($postalCodeMin, 0, 3);
         $zipPrefixMax = substr($postalCodeMax, 0, 3);
         $zipSuffixMin = substr($postalCodeMin, 4, 4);
@@ -102,17 +87,38 @@ class RandomGenerator {
         $zipPrefix = $faker->numberBetween($zipPrefixMin, $zipPrefixMax);
         $zipSuffix = $faker->numberBetween($zipSuffixMin, $zipSuffixMax);
 
-        // ゼロパディングを行う
-        $zipCode = str_pad($zipPrefix, 3, "0", STR_PAD_LEFT) . '-' .
-                    str_pad($zipSuffix, 4, "0", STR_PAD_LEFT);
+        return str_pad($zipPrefix, 3, "0", STR_PAD_LEFT) . '-' .
+               str_pad($zipSuffix, 4, "0", STR_PAD_LEFT);
+    }
 
-        // 従業員の配列を生成
+    /**
+     * レストランロケーションの生成
+     *
+     * @param int $employeeCount
+     * @param int $salaryRange
+     * @param string $postalCodeMin
+     * @param string $postalCodeMax
+     * @return RestaurantLocation
+     */
+    public static function createRestaurantLocation(
+        int $employeeCount,
+        int $salaryRange,
+        string $postalCodeMin,
+        string $postalCodeMax
+    ): RestaurantLocation {
+        $faker = Factory::create();
+
+        $name = $faker->company;
+        $address = $faker->streetAddress;
+        $city = $faker->city;
+        $state = $faker->state;
+        $zipCode = self::generateZipCodeInRange($postalCodeMin, $postalCodeMax);
+
         $employees = self::createEmployees($employeeCount, $salaryRange);
         $isOpen = $faker->boolean;
         $hasDriveThru = $faker->boolean;
 
-        // RestaurantLocationオブジェクトの生成
-        $restaurantLocation = new RestaurantLocation(
+        return new RestaurantLocation(
             $name,
             $address,
             $city,
@@ -122,8 +128,6 @@ class RandomGenerator {
             $isOpen,
             $hasDriveThru
         );
-
-        return $restaurantLocation;
     }
 
     /**
@@ -157,7 +161,6 @@ class RandomGenerator {
 
         return $restaurantLocations;
     }
-
 
     /**
      * レストランチェーンを生成
