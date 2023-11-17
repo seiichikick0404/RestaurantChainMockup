@@ -53,15 +53,24 @@ class Employee extends User implements FileConvertible {
         $this->awards = $awards;
     }
 
+    /**
+     * 従業員情報を文字列で返す
+     *
+     * @return string 従業員情報の文字列
+     */
     public function toString(): string {
         return "    [Employees]\n" .
-               "    Name: " . $this->getFullName() . "\n" .
-               "    Job Title: " . $this->jobTitle . "\n" .
-               "    Start Date: " . $this->startDate->format('Y-m-d') . "\n" .
-               "    Salary: " . $this->salary . "\n\n";
+            "    Name: " . $this->getFullName() . "\n" .
+            "    Job Title: " . $this->jobTitle . "\n" .
+            "    Start Date: " . $this->startDate->format('Y-m-d') . "\n" .
+            "    Salary: " . $this->salary . "\n\n";
     }
 
-
+    /**
+     * 従業員情報をHTML形式で返す
+     *
+     * @return string 従業員情報のHTML
+     */
     public function toHTML(): string {
         return sprintf(
             "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s, Salary: $%s</p>",
@@ -73,36 +82,64 @@ class Employee extends User implements FileConvertible {
         );
     }
 
+    /**
+     * 従業員情報をマークダウン形式で返す
+     *
+     * @return string 従業員情報のマークダウン
+     */
     public function toMarkdown(): string {
         return "- ID: ".parent::getID().", Job Title: ".$this->jobTitle.", Name: ".parent::getFullName().", Start Date: ".$this->startDate->format('Y-m-d').",  Salary: $".$this->salary."\n";
     }
 
+    /**
+     * 従業員情報を配列で返す
+     *
+     * @return array 従業員情報の配列
+     */
     public function toArray(): array {
         return [
             'id' => parent::getId(),
             'jobTitle' => $this->jobTitle,
             'fullName' => $this->getFullName(),
-            'startDate' => $this->getStartDate(),
+            'startDate' => $this->startDate->format('Y-m-d'),
+            'salary' => $this->salary
         ];
     }
 
-    public function getJobTitle(): string
-    {
+    /**
+     * 職種を取得
+     *
+     * @return string
+     */
+    public function getJobTitle(): string {
         return $this->jobTitle;
     }
 
-    public function getSalary(): float
-    {
+    /**
+     * 給与を取得
+     *
+     * @return float
+     */
+    public function getSalary(): float {
         return $this->salary;
     }
 
-    public function getStartDate(): DateTime
-    {
+    /**
+     * 開始日を取得
+     *
+     * @return DateTime
+     */
+    public function getStartDate(): DateTime {
         return $this->startDate;
     }
 
-    public function getAwards(): array
-    {
+    /**
+     * 受賞歴を取得
+     *
+     * @return array
+     */
+    public function getAwards(): array {
         return $this->awards;
     }
+
 }

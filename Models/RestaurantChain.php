@@ -56,14 +56,24 @@ class RestaurantChain extends Company implements FileConvertible {
         $this->parentCompany = $parentCompany;
     }
 
+    /**
+     * レストランチェーンの情報を文字列で返します。
+     *
+     * @return string
+     */
     public function toString(): string {
         return "[Restaurant Chain]\n" .
-               "Name: " . $this->name . "\n" .
-               "Cuisine Type: " . $this->cuisineType . "\n" .
-               "Number of Locations: " . $this->numberOfLocations . "\n" .
-               "Parent Company: " . $this->parentCompany . "\n\n";
+            "Name: " . $this->name . "\n" .
+            "Cuisine Type: " . $this->cuisineType . "\n" .
+            "Number of Locations: " . $this->numberOfLocations . "\n" .
+            "Parent Company: " . $this->parentCompany . "\n\n";
     }
 
+    /**
+     * レストランチェーンの情報をHTML形式で返します。
+     *
+     * @return string
+     */
     public function toHTML(): string {
         return sprintf(
             "<h2>Restaurant Chain : %s</h2>",
@@ -71,42 +81,73 @@ class RestaurantChain extends Company implements FileConvertible {
         );
     }
 
+    /**
+     * レストランチェーンの情報をマークダウン形式で返します。
+     *
+     * @return string
+     */
     public function toMarkdown(): string {
-        return "# Restaurant Chain : ". $this->getName()."\n# (Number of location : ".$this->numberOfLocations.")\n";
+        return "# Restaurant Chain : " . $this->getName() . "\n" .
+            "## Number of locations: " . $this->getNumberOfLocations() . "\n";
     }
 
+    /**
+     * レストランチェーンの情報を配列で返します。
+     *
+     * @return array
+     */
     public function toArray(): array {
         return [
-            'chainId' => $this->chainId,
-            'restaurantLocations' => $this->restaurantLocations,
-            'cuisineType' => $this->cuisineType,
-            'numberOfLocations' =>  $this->numberOfLocations,
-            'parentCompany' => $this->parentCompany,
+            'chainId' => $this->getChainId(),
+            'restaurantLocations' => $this->getRestaurantLocations(),
+            'cuisineType' => $this->getCuisineType(),
+            'numberOfLocations' => $this->getNumberOfLocations(),
+            'parentCompany' => $this->getParentCompany(),
         ];
     }
 
-    public function getParentCompany(): string
-    {
+    /**
+     * 親会社の名前を返します。
+     *
+     * @return string
+     */
+    public function getParentCompany(): string {
         return $this->parentCompany;
     }
 
-    public function getRestaurantLocations(): array
-    {
+    /**
+     * レストランの場所のリストを返します。
+     *
+     * @return array
+     */
+    public function getRestaurantLocations(): array {
         return $this->restaurantLocations;
     }
 
-    public function getChainId(): int
-    {
+    /**
+     * レストランチェーンのIDを返します。
+     *
+     * @return int
+     */
+    public function getChainId(): int {
         return $this->chainId;
     }
 
-    public function getCuisineType(): string
-    {
+    /**
+     * レストランチェーンの料理の種類を返します。
+     *
+     * @return string
+     */
+    public function getCuisineType(): string {
         return $this->cuisineType;
     }
 
-    public function getNumberOfLocations(): int
-    {
+    /**
+     * レストランチェーンの場所の数を返します。
+     *
+     * @return int
+     */
+    public function getNumberOfLocations(): int {
         return $this->numberOfLocations;
     }
 }

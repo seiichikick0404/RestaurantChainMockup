@@ -44,62 +44,105 @@ class RestaurantLocation implements FileConvertible {
         $this->hasDriveThru = $hasDriveThru;
     }
 
+    /**
+     * レストランのロケーション情報を文字列で返す
+     *
+     * @return string
+     */
     public function toString(): string {
         return "  [Locations]\n" .
-               "  Name: " . $this->name . "\n" .
-               "  Address: " . $this->address . "\n" .
-               "  Zip Code: " . $this->zipCode . "\n\n";
+            "  Name: " . $this->name . "\n" .
+            "  Address: " . $this->address . "\n" .
+            "  Zip Code: " . $this->zipCode . "\n\n";
     }
 
-
+    /**
+     * レストランのロケーション情報をHTML形式で返す
+     *
+     * @return string
+     */
     public function toHTML(): string {
         return sprintf(
             "\t・Company Name: %s, Address: %s, Zip Code: %s\n\n",
             $this->name,
             $this->address,
-            $this->zipCode,
+            $this->zipCode
         );
     }
 
+    /**
+     * レストランのロケーション情報をマークダウン形式で返す
+     *
+     * @return string
+     */
     public function toMarkdown(): string {
-        return "- Company Name: ".$this->name.", Address: ".$this->address.", Zip Code: ".$this->zipCode."\n";
+        return "- Company Name: " . $this->name . ", Address: " . $this->address . ", Zip Code: " . $this->zipCode . "\n";
     }
 
+    /**
+     * レストランのロケーション情報を配列で返す
+     *
+     * @return array
+     */
     public function toArray(): array {
         return [
             'companyName' => $this->name,
             'Address' => $this->address,
-            'zipCode' => $this->zipCode,
+            'zipCode' => $this->zipCode
         ];
     }
 
-    public function getName(): string
-    {
+    /**
+     * レストランの名前を取得
+     *
+     * @return string
+     */
+    public function getName(): string {
         return $this->name;
     }
 
-    public function getAddress(): string
-    {
+    /**
+     * レストランの住所を取得
+     *
+     * @return string
+     */
+    public function getAddress(): string {
         return $this->address;
     }
 
-    public function getCity(): string
-    {
+    /**
+     * レストランの所在都市を取得
+     *
+     * @return string
+     */
+    public function getCity(): string {
         return $this->city;
     }
 
-    public function getState(): string
-    {
+    /**
+     * レストランの所在州を取得
+     *
+     * @return string
+     */
+    public function getState(): string {
         return $this->state;
     }
 
-    public function getZipCode(): string
-    {
+    /**
+     * レストランの郵便番号を取得
+     *
+     * @return string
+     */
+    public function getZipCode(): string {
         return $this->zipCode;
     }
 
-    public function getEmployees(): array
-    {
+    /**
+     * レストランの従業員リストを取得
+     *
+     * @return array
+     */
+    public function getEmployees(): array {
         return $this->employees;
     }
 }

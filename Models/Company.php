@@ -56,6 +56,11 @@ class Company implements FileConvertible {
     }
 
 
+    /**
+     * stringで出力
+     *
+     * @return string
+     */
     public function toString(): string {
         return sprintf(
             "Name: %s\nFounding Year: %d\nDescription: %s\nWebsite: %s\nPhone: %s\nIndustry: %s\nCEO: %s\nPublicly Traded: %s\nCountry: %s\nFounder: %s\nTotal Employees: %d",
@@ -73,7 +78,11 @@ class Company implements FileConvertible {
         );
     }
 
-
+    /**
+     * HTMLで出力
+     *
+     * @return string
+     */
     public function toHTML(): string {
         return sprintf(
             "<h2>Restaurant Chain : %s</h2>",
@@ -81,6 +90,11 @@ class Company implements FileConvertible {
         );
     }
 
+    /**
+     * マークダウンで出力
+     *
+     * @return string
+     */
     public function toMarkdown(): string {
         return " - name: {$this->name}
                  - foundingYear: {$this->foundingYear}
@@ -95,6 +109,11 @@ class Company implements FileConvertible {
                  - totalEmployees: {$this->totalEmployees}";
     }
 
+    /**
+     * 配列を返す
+     *
+     * @return array
+     */
     public function toArray(): array {
         return [
             'name' => $this->name,
@@ -113,6 +132,8 @@ class Company implements FileConvertible {
 
 
     /**
+     * 会社の名前を取得します。
+     *
      * @return string
      */
     public function getName(): string
@@ -120,51 +141,101 @@ class Company implements FileConvertible {
         return $this->name;
     }
 
+    /**
+     * 会社の設立年を取得します。
+     *
+     * @return int
+     */
     public function getFoundingYear(): int
     {
         return $this->foundingYear;
     }
 
+    /**
+     * 会社の説明を取得します。
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
+    /**
+     * 会社のウェブサイトURLを取得します。
+     *
+     * @return string
+     */
     public function getWebsite(): string
     {
         return $this->website;
     }
 
+    /**
+     * 会社の電話番号を取得します。
+     *
+     * @return string
+     */
     public function getPhone(): string
     {
         return $this->phone;
     }
 
+    /**
+     * 会社の業界タイプを取得します。
+     *
+     * @return string
+     */
     public function getIndustry(): string
     {
         return $this->industry;
     }
 
+    /**
+     * 会社のCEOの名前を取得します。
+     *
+     * @return string
+     */
     public function getCeo(): string
     {
         return $this->ceo;
     }
 
+    /**
+     * 会社が公開企業かどうかを確認します。
+     *
+     * @return bool
+     */
     public function getPubliclyTraded(): bool
     {
         return $this->publiclyTraded;
     }
 
+    /**
+     * 会社が位置する国を取得します。
+     *
+     * @return string
+     */
     public function getCountry(): string
     {
         return $this->country;
     }
 
+    /**
+     * 会社の創業者の名前を取得します。
+     *
+     * @return string
+     */
     public function getFounder(): string
     {
         return $this->founder;
     }
 
+    /**
+     * 会社の従業員の総数を取得します。
+     *
+     * @return int
+     */
     public function getTotalEmployees(): int
     {
         return $this->totalEmployees;
