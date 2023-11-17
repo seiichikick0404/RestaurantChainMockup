@@ -70,8 +70,8 @@ class RandomGenerator {
     /**
      * 指定された範囲内で郵便番号を生成する
      *
-     * @param string $postalCodeMin 最小郵便番号
-     * @param string $postalCodeMax 最大郵便番号
+     * @param string $postalCodeMin
+     * @param string $postalCodeMax
      * @return string 生成された郵便番号
      */
     private static function generateZipCodeInRange(string $postalCodeMin, string $postalCodeMax): string {
