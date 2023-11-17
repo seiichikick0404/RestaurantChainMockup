@@ -3,11 +3,9 @@
 namespace Helpers;
 
 use Faker\Factory;
-use Models\User;
 use Models\Employee;
 use Models\RestaurantChain;
 use Models\RestaurantLocation;
-use Models\Company;
 
 class RandomGenerator {
     const MIN_RESTAURANT_CHAIN = 3;
