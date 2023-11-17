@@ -4,7 +4,6 @@ namespace Models;
 
 use DateTime;
 use Interfaces\FileConvertible;
-use Faker\Factory;
 
 class User implements FileConvertible {
     protected int $id;

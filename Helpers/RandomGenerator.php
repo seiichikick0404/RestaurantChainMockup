@@ -10,8 +10,6 @@ use Models\RestaurantLocation;
 use Models\Company;
 
 class RandomGenerator {
-
-    
     const MIN_RESTAURANT_CHAIN = 3;
     const MAX_RESTAURANT_CHAIN = 5;
     const MIN_EMPLOYEE = 2;
@@ -20,39 +18,9 @@ class RandomGenerator {
     const MAX_RESTAURANT_LOCATION = 5;
 
 
-
-    public static function user(): User {
-        $faker = Factory::create();
-
-        return new User(
-            $faker->randomNumber(),
-            $faker->firstName(),
-            $faker->lastName(),
-            $faker->email,
-            $faker->password,
-            $faker->phoneNumber,
-            $faker->address,
-            $faker->dateTimeThisCentury,
-            $faker->dateTimeBetween('-10 years', '+20 years'),
-            $faker->randomElement(['admin', 'user', 'editor'])
-        );
-    }
-
-    public static function users(int $min, int $max): array {
-        $faker = Factory::create();
-        $users = [];
-        $numOfUsers = $faker->numberBetween($min, $max);
-
-        for ($i = 0; $i < $numOfUsers; $i++) {
-            $users[] = self::user();
-        }
-
-        return $users;
-    }
-
     /**
      * 従業員をランダム生成
-     * 
+     *
      * @param int $salaryRange
      * @return Employee
      */
@@ -85,7 +53,7 @@ class RandomGenerator {
 
     /**
      * 従業員を複数人生成する
-     * 
+     *
      * @param int $employeeCount
      * @param int $salaryRange
      * @return array
@@ -103,7 +71,7 @@ class RandomGenerator {
 
     /**
      * レストランロケーションの生成
-     * 
+     *
      * @param int $employeeCount
      * @param int $salaryRange
      * @param string $postalCodeMin,
@@ -160,7 +128,7 @@ class RandomGenerator {
 
     /**
      * 複数のレストランのロケーションを生成
-     * 
+     *
      * @param int $employeeCount
      * @param int $salaryRange
      * @param int $locationCount
@@ -193,7 +161,7 @@ class RandomGenerator {
 
     /**
      * レストランチェーンを生成
-     * 
+     *
      * @param int $employeeCount
      * @param int $salaryRange
      * @param int $locationCount
@@ -260,10 +228,9 @@ class RandomGenerator {
         return $restaurantChain;
     }
 
-
     /**
      * レストランチェーンを複数生成する
-     * 
+     *
      * @param int $min
      * @param int $max
      * @param int $employeeCount
@@ -300,4 +267,4 @@ class RandomGenerator {
         return $restaurantChains;
     }
 }
-?>
+

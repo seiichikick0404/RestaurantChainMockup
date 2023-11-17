@@ -2,7 +2,6 @@
 
 namespace Models;
 
-use Faker\Extension\FileExtension;
 use Models\Employee;
 use Interfaces\FileConvertible;
 
@@ -51,7 +50,7 @@ class RestaurantLocation implements FileConvertible {
                "  Address: " . $this->address . "\n" .
                "  Zip Code: " . $this->zipCode . "\n\n";
     }
-    
+
 
     public function toHTML(): string {
         return sprintf(
@@ -103,6 +102,4 @@ class RestaurantLocation implements FileConvertible {
     {
         return $this->employees;
     }
-
-    
 }

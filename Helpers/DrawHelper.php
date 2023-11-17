@@ -7,7 +7,7 @@ class DrawHelper {
 
     /**
      * マークダウンで表示
-     * 
+     *
      * @param array<RestaurantChain> $restaurantChains
      * @return void
      */
@@ -28,7 +28,7 @@ class DrawHelper {
 
     /**
      * JSONで表示
-     * 
+     *
      * @param array<RestaurantChain> $restaurantChains
      * @return void
      */
@@ -75,7 +75,7 @@ class DrawHelper {
 
     /**
      * テキスト形式で出力
-     * 
+     *
      * @param array<RestaurantChain> $restaurantChains
      * @return void
      */

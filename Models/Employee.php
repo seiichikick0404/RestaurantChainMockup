@@ -5,8 +5,6 @@ namespace Models;
 use DateTime;
 use Models\User;
 use Interfaces\FileConvertible;
-use Faker\Factory;
-
 
 
 class Employee extends User implements FileConvertible {
@@ -35,7 +33,7 @@ class Employee extends User implements FileConvertible {
         DateTime $startDate,
         array $awards,
     ) {
-        // 親クラスのコンストラクタを呼び出す
+
         parent::__construct(
             $id,
             $firstName,
@@ -107,6 +105,4 @@ class Employee extends User implements FileConvertible {
     {
         return $this->awards;
     }
-
-    
 }

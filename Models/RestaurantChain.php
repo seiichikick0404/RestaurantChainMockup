@@ -2,7 +2,6 @@
 
 namespace Models;
 
-use Faker\Factory;
 use Models\Company;
 use Interfaces\FileConvertible;
 

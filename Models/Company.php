@@ -2,7 +2,6 @@
 
 namespace Models;
 
-use Faker\Factory;
 use Interfaces\FileConvertible;
 
 class Company implements FileConvertible {
@@ -169,49 +168,5 @@ class Company implements FileConvertible {
     public function getTotalEmployees(): int
     {
         return $this->totalEmployees;
-    }
-
-    public function setName(string $name): void {
-        $this->name = $name;
-    }
-
-    public function setFoundingYear(int $foundingYear): void {
-        $this->foundingYear = $foundingYear;
-    }
-
-    public function setDescription(string $description): void {
-        $this->description = $description;
-    }
-
-    public function setWebsite(string $website): void {
-        $this->website = $website;
-    }
-
-    public function setPhone(string $phone): void {
-        $this->phone = $phone;
-    }
-
-    public function setIndustry(string $industry): void {
-        $this->industry = $industry;
-    }
-
-    public function setCeo(string $ceo): void {
-        $this->ceo = $ceo;
-    }
-
-    public function setPubliclyTraded(bool $publiclyTraded): void {
-        $this->publiclyTraded = $publiclyTraded;
-    }
-
-    public function setCountry(string $country): void {
-        $this->country = $country;
-    }
-
-    public function setFounder(string $founder): void {
-        $this->founder = $founder;
-    }
-
-    public function setTotalEmployees(int $totalEmployees): void {
-        $this->totalEmployees = $totalEmployees;
     }
 }

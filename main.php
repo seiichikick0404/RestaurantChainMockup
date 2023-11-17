@@ -1,29 +1,3 @@
-<?php
-// // コードベースのファイルのオートロード
-// spl_autoload_extensions(".php"); 
-// spl_autoload_register();
-
-// use Helpers\RandomGenerator;
-// use Models\Employee;
-
-// // composerの依存関係のオートロード
-// require_once 'vendor/autoload.php';
-
-// // クエリ文字列からパラメータを取得
-// $min = $_GET['min'] ?? 3;
-// $max = $_GET['max'] ?? 5;
-
-// // パラメータが整数であることを確認
-// $min = (int)$min;
-// $max = (int)$max;
-
-
-// // 会社とそのチェーン店配列を取得
-// $companiesRestaurantChains = RandomGenerator::createCompaniesRestaurantChains($min, $max);
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,16 +6,13 @@
     <title>User Profiles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./public/style.css">
-    <style>
-        
-    </style>
 </head>
 
 <body class="bg-light">
 
     <?php $index = 0 ?>
     <div class="container mt-5">
-        <?php foreach ($restaurantChains as $chainIndex => $chain): ?>
+        <?php foreach ($restaurantChains as $chain): ?>
             <div class="container custom-container">
                 <h2 class="mb-3 text-center">
                     <?php echo $chain->getName(); ?>
