@@ -5,7 +5,8 @@
   "autoload": {
     "psr-4": {
       "Helpers\\": "Helpers/",
-      "Models\\": "Models/"
+      "Models\\": "Models/",
+      "Interfaces\\": "Interfaces/"
     }
   }
 }
